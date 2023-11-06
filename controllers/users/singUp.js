@@ -1,4 +1,4 @@
-import service from "../../models/user.js";
+import { signup } from "#services/index.js";
 
 export async function signup(req, res) {
   const { email, password } = req.body;

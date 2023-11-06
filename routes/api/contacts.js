@@ -1,21 +1,27 @@
-import { Router } from "express"
-import {
-  createContacts,
-  deleteContacts,
-  indexContacts,
-  showContacts,
-  updateContacts,
-  updateStatusContacts,
-} from ("../../controllers/index.js");
+import express from "express";
 
+import * as validators from "#validators/index.js";
+import * as controllers from "#controllers/index.js";
 
-export const router = Router();
+const contactsRouter = express.Router();
 
-router.get("/", indexContacts);
-router.get("/:id", showContacts);
-router.patch("/:id/favorite", updateStatusContacts);
-router.post("/", contactPostSchema, createContacts);
-router.put("/:id", contactPutSchema, updateContacts);
-router.delete("/:id", deleteContacts);
+contactsRouter.get("/", controllers.indexContacts);
+contactsRouter.get("/:id", controllers.showContacts);
+contactsRouter.patch(
+  "/:id/favorite",
+  validators.contactFavoriteSchema,
+  controllers.updateStatusContacts
+);
+contactsRouter.post(
+  "/",
+  validators.contactPostSchema,
+  controllers.createContacts
+);
+contactsRouter.put(
+  "/:id",
+  validators.contactPutSchema,
+  controllers.updateContacts
+);
+contactsRouter.delete("/:id", controllers.deleteContacts);
 
-module.exports = router;
+export { contactsRouter };

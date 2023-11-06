@@ -1,4 +1,4 @@
-import service from "../../models/contact.js";
+import { updateContact } from "#services/index.js";
 
 export async function updateContacts(req, res, next) {
   const { id } = req.params;
@@ -9,7 +9,7 @@ export async function updateContacts(req, res, next) {
       return res.status(400).json({ message: "missing fields" });
     }
 
-    const putContact = await service.updateContact(id, body);
+    const putContact = await updateContact(id, body);
     res.status(200).json({ ...putContact["_doc"], ...body });
   } catch (error) {
     if (error.message.includes("Cast to ObjectId failed for value")) {

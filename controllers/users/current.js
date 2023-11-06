@@ -1,4 +1,4 @@
-import service from "../../models/user.js";
+import { current } from "#services/index.js";
 
 export async function current(req, res) {
   const { email, subscription } = req.user;

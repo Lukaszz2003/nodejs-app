@@ -1,40 +1,33 @@
-import Contacts from "../../models/contact.js";
-import Users from "../../models/user.js";
+import { Contacts } from "./schemas/contact.js";
 
-const getAllContacts = async ({ owner, skip, limit, favorite }) => {
-  return Contacts.find(
-    favorite ? { owner, favorite } : { owner },
-    "-createdAt -updatedAt"
-  )
-    .populate("owner", "email subscription -_id")
-    .skip(skip)
-    .limit(limit);
+export const getAllContacts = async () => {
+  return Contacts.find();
 };
-const getByIdContact = async ({ id, owner }) => {
-  return Contacts.findOne({ _id: id, owner });
+export const getByIdContact = async (id) => {
+  return Contacts.findOne({ _id: id });
 };
-const createContact = async ({ body, owner }) => {
-  return Contacts.create({ ...body, owner });
+export const createContact = async (body) => {
+  return Contacts.create({ ...body });
 };
-const removeContact = async ({ id, owner }) => {
-  return Contacts.findOneAndRemove({ _id: id, owner });
+export const removeContact = async (id) => {
+  return Contacts.findByIdAndRemove({ _id: id });
 };
-const updateContact = async ({ id, body, owner }) => {
-  return Contacts.findOneAndUpdate({ _id: id, owner }, body, { new: true });
+export const updateContact = async (id, body) => {
+  return Contacts.findByIdAndUpdate({ _id: id }, body);
 };
-const updateStatusContact = async ({ id, body, owner }) => {
-  return Contacts.findByIdAndUpdate({ _id: id, owner }, body, { new: true });
+export const updateStatusContact = async (id, body) => {
+  return Contacts.findByIdAndUpdate({ _id: id }, body);
 };
 
-const validateEmail = async (email) => {
+export const validateEmail = async (email) => {
   const user = await Users.findOne({ email });
   return user;
 };
-const createUser = async ({ email, password }) => {
+export const createUser = async ({ email, password }) => {
   const result = await Users.create({ email, password });
   return result;
 };
-const updateUserToken = async ({ id, token }) => {
+export const updateUserToken = async ({ id, token }) => {
   const result = await Users.findByIdAndUpdate(
     id,
     { token: token },
@@ -42,28 +35,15 @@ const updateUserToken = async ({ id, token }) => {
   );
   return result;
 };
-const findByIdUser = async ({ id }) => {
+export const findByIdUser = async ({ id }) => {
   const result = await Users.findById(id);
   return result;
 };
-const updateSubscription = async ({ id, subscription }) => {
+export const updateSubscription = async ({ id, subscription }) => {
   const result = await Users.findByIdAndUpdate(
     id,
     { subscription },
     { new: true }
   );
   return result;
-};
-module.exports = {
-  getAllContacts,
-  getByIdContact,
-  createContact,
-  removeContact,
-  updateContact,
-  updateStatusContact,
-  validateEmail,
-  createUser,
-  updateUserToken,
-  findByIdUser,
-  updateSubscription,
 };

@@ -1,8 +1,8 @@
-import service from "../../models/contact.js";
+import { removeContact } from "#services/index.js";
 
 export async function deleteContacts(req, res, next) {
   try {
-    const data = await service.removeContact(req.params.id);
+    const data = await removeContact(req.params.id);
     if (data) {
       return res.status(200).json({ message: "contact deleted" });
     }

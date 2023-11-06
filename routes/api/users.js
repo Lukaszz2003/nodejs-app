@@ -1,19 +1,20 @@
-import { Router } from "express"
-import {
-  current,
-  login,
-  logout,
-  singUp,
-  subscription,
-} from ("../../controllers/index.js");
+import express from "express";
 
+import * as user from "#users/index.js";
+import * as validators from "#validators/index.js";
+import * as middlewares from "#middlewares/auth.js";
 
-export const router = Router();
+const router = express.Router();
 
-router.post('/signup', usersPostSchema, signup);
-router.post('/login', usersPostSchema, login);
-router.get('/logout', auth, logout);
-router.get('/current', auth, current);
-router.patch('/', auth, usersSubscSchema, subscription);
+userRouter.post("/signup", validators.usersPostSchema, user.signUp);
+userRouter.post("/login", validators.usersPostSchema, user.login);
+userRouter.get("/logout", middlewares.auth, user.logout);
+userRouter.get("/current", middlewares.auth, user.current);
+userRouter.patch(
+  "/",
+  middlewares.auth,
+  validators.usersSubscSchema,
+  user.subscription
+);
 
-module.exports = router;
+export { userRouter };

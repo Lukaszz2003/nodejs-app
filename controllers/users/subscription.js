@@ -1,4 +1,4 @@
-import service from "../../models/user.js";
+import { subscription } from "#services/index.js";
 
 export async function subscription(req, res) {
   const { id } = req.user;
