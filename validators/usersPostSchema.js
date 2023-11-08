@@ -5,12 +5,10 @@ const schema = Joi.object({
   password: Joi.string().required().min(6).max(12),
 });
 
-const usersPostSchema = (req, res, next) => {
+export const usersPostSchema = (req, res, next) => {
   const { error } = schema.validate(req.body);
   if (error) {
     return res.status(400).json({ message: error.message });
   }
   next();
 };
-
-module.exports = usersPostSchema;

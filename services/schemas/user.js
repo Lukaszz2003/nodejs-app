@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { model, Schema } from "mongoose";
 
 const emailRegexp =
   /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
@@ -29,6 +29,4 @@ const user = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Users = model("users", user);
-
-module.exports = Users;
+export const Users = model("users", user);

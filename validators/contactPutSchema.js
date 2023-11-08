@@ -6,12 +6,10 @@ const schema = Joi.object({
   phone: Joi.string().min(10).max(20),
 });
 
-const contactPutSchema = (req, res, next) => {
+export const contactPutSchema = (req, res, next) => {
   const { error } = schema.validate(req.body);
   if (error) {
     return res.status(400).json(error.message);
   }
   next();
 };
-
-module.exports = contactPutSchema;

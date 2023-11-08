@@ -3,7 +3,7 @@ import "dotenv/config";
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-const auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
   const { authorization = "" } = req.headers;
 
   const [bearer, token] = authorization.split(" ");
@@ -34,5 +34,3 @@ const auth = async (req, res, next) => {
     res.status(400).json({ message: error.message });
   }
 };
-
-module.exports = auth;

@@ -1,7 +1,7 @@
 import express from "express";
 
 import * as validators from "#validators/index.js";
-import * as controllers from "#controllers/index.js";
+import * as controllers from "#controllers/contacts";
 
 const contactsRouter = express.Router();
 

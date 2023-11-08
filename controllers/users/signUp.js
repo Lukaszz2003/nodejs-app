@@ -1,6 +1,6 @@
-import { signup } from "#services/index.js";
+import * as service from "#services/index.js";
 
-export async function signup(req, res) {
+export async function signUp(req, res) {
   const { email, password } = req.body;
   try {
     const user = await service.validateEmail(email);
