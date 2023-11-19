@@ -57,3 +57,20 @@ export const updateAvatar = async ({ id, avatarURL }) => {
   );
   return result;
 };
+
+export const findVerificationToken = async ({ verificationToken }) => {
+  const result = await Users.findOne({ verificationToken });
+  return result;
+};
+export const findUserIDandUpdateVerify = async ({
+  id,
+  verificationToken = null,
+  verify = true,
+}) => {
+  const result = await Users.findByIdAndUpdate(
+    id,
+    { verificationToken, verify },
+    { new: true }
+  );
+  return result;
+};

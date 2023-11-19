@@ -16,5 +16,7 @@ userRouter.patch(
   validators.usersSubscSchema,
   user.subscription
 );
+userRouter.post("/verify", usersVerifySchema, sendVerifyCodeAgain);
+userRouter.get("/verify/:verificationToken", verify);
 userRouter.patch("/avatars", auth, upload.single("avatars"), avatars);
 export { userRouter };
