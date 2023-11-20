@@ -48,3 +48,12 @@ export const updateSubscription = async ({ id, subscription }) => {
   );
   return result;
 };
+
+export const updateAvatar = async ({ id, avatarURL }) => {
+  const result = await Users.findByIdAndUpdate(
+    id,
+    { avatarURL },
+    { new: true }
+  );
+  return result;
+};

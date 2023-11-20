@@ -16,5 +16,5 @@ userRouter.patch(
   validators.usersSubscSchema,
   user.subscription
 );
-
+userRouter.patch("/avatars", auth, upload.single("avatars"), avatars);
 export { userRouter };
