@@ -21,9 +21,21 @@ const user = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
+    avatarURL: {
+      type: String,
+      default: gravatar.url(this.email),
+    },
     token: {
       type: String,
       default: "",
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
     },
   },
   { versionKey: false, timestamps: true }
